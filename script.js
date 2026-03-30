@@ -116,5 +116,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// 4. CUSTOM SCROLL PROGRESS BAR
+const scrollBar = document.getElementById('scroll-bar');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+    scrollBar.style.height = scrollPercentage + '%';
+});
+
 init();
 animate();
