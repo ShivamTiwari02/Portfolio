@@ -47,6 +47,12 @@ body {
     z-index: 1000;
     backdrop-filter: blur(5px);
     border: 1px solid var(--glass-border);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.scroll-progress-container.visible {
+    opacity: 1;
 }
 
 .scroll-progress-bar {
@@ -462,13 +468,15 @@ footer {
     opacity: 0;
     transition: all 0.4s ease;
 }
-.email-btn:hover .btn-text {
-    max-width: 0;
-    opacity: 0;
-}
-.email-btn:hover .email-address {
-    max-width: 300px;
-    opacity: 1;
+@media (hover: hover) {
+    .email-btn:hover .btn-text {
+        max-width: 0;
+        opacity: 0;
+    }
+    .email-btn:hover .email-address {
+        max-width: 300px;
+        opacity: 1;
+    }
 }
 
 /* === SCROLL ANIMATIONS === */
@@ -486,6 +494,15 @@ footer {
 @media screen and (max-width: 768px) {
     nav { padding: 15px 20px; }
     .nav-links { display: none; } /* Simplified for mobile */
+
+    /* Permanently show email on mobile */
+    .email-btn .btn-text {
+        display: none;
+    }
+    .email-btn .email-address {
+        max-width: 300px;
+        opacity: 1;
+    }
 
     .experience-grid {
         max-width: 100%;

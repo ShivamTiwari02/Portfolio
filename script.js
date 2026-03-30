@@ -118,12 +118,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 4. CUSTOM SCROLL PROGRESS BAR
 const scrollBar = document.getElementById('scroll-bar');
+const scrollContainer = document.querySelector('.scroll-progress-container');
+let isScrolling;
 
 window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercentage = (scrollTop / scrollHeight) * 100;
     scrollBar.style.height = scrollPercentage + '%';
+
+    // Show the progress bar container
+    scrollContainer.classList.add('visible');
+
+    // Clear our timeout throughout the scroll and set a new one
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+        scrollContainer.classList.remove('visible');
+    }, 1000); // Hides 1 second after scroll stops
 });
 
 init();
