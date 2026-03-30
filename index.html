@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Tiwari | Modern Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <nav>
+        <a href="#" style="text-decoration: none;"><h1>ST.</h1></a>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content-wrapper">
+            <div class="profile-img-container hero-img-enter">
+                <div class="profile-img-glow"></div>
+                <img src="Profile Photo.jpg" alt="Shivam Tiwari" class="profile-img floating">
+            </div>
+            <div class="hero-text">
+                <div class="hidden"><h2 class="floating">Shivam Tiwari</h2></div>
+                <div class="hidden"><p class="floating floating-delay-1">Building optimized, scalable cloud infrastructure and serverless solutions.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="hidden"><h2 class="section-title floating">Experience</h2></div>
+
+        <div class="experience-role hidden">
+            <div class="glass-card border-cyan floating">
+                <div class="timeline-date">Jan 2023 - Present</div>
+                <h3>Senior Software Engineer</h3>
+                <h4>Cimpress India</h4>
+            </div>
+        </div>
+
+        <div class="experience-grid">
+            <div class="experience-row hidden">
+                <div class="glass-card border-cyan topic-card floating floating-delay-1">
+                    <h4>Cost-Optimized Hybrid Deployment</h4>
+                </div>
+                <div class="glass-card border-cyan desc-card floating floating-delay-2">
+                    <h4 class="mobile-title">Cost-Optimized Hybrid Deployment</h4>
+                    <p>Engineered a hybrid system transitioning EC2-based services to server-less architectures on-demand; updated the processor to utilize ECR repositories over MAR files, enabling zero-cost hosting for POC services and reducing API costs by 35%.</p>
+                    <div class="metric-highlight">35% API Cost Reduction</div>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-cyan topic-card floating">
+                    <h4>High-Performance ECS Scaling</h4>
+                </div>
+                <div class="glass-card border-cyan desc-card floating floating-delay-1">
+                    <h4 class="mobile-title">High-Performance ECS Scaling</h4>
+                    <p>Integrated Amazon EFS with ECS cluster instances to persist container layers locally; eliminated redundant ECR image pulls, resulting in an 80% reduction in auto-scaling spin-up times.</p>
+                    <div class="metric-highlight">80% Faster Auto-scaling</div>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-cyan topic-card floating floating-delay-2">
+                    <h4>CI/CD Infrastructure Management</h4>
+                </div>
+                <div class="glass-card border-cyan desc-card floating">
+                    <h4 class="mobile-title">CI/CD Infrastructure Management</h4>
+                    <p>Fully configured and maintained self-hosted GitLab runners; re-architected configurations to support concurrent multi-job execution on single instances, significantly improving resource utilization and reducing pipeline overhead.</p>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-cyan topic-card floating floating-delay-1">
+                    <h4>ML Model Orchestration</h4>
+                </div>
+                <div class="glass-card border-cyan desc-card floating floating-delay-2">
+                    <h4 class="mobile-title">ML Model Orchestration</h4>
+                    <p>Led the deployment and lifecycle management of multiple ML models, integrating external APIs to enhance service reliability and throughput.</p>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-cyan topic-card floating">
+                    <h4>Efficiency & Scaling</h4>
+                </div>
+                <div class="glass-card border-cyan desc-card floating floating-delay-1">
+                    <h4 class="mobile-title">Efficiency & Scaling</h4>
+                    <p>Developed automated scheduled scaling mechanisms and optimized memory footprints across core services, achieving a 60% reduction in memory usage and ensuring cost-effective performance during low-demand periods.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 40px;"></div>
+
+        <div class="experience-role hidden">
+            <div class="glass-card border-purple floating">
+                <div class="timeline-date">Aug 2021 - Dec 2022</div>
+                <h3>Software Engineer</h3>
+                <h4>Cimpress India</h4>
+            </div>
+        </div>
+
+        <div class="experience-grid">
+            <div class="experience-row hidden">
+                <div class="glass-card border-purple topic-card floating floating-delay-2">
+                    <h4>Infrastructure Migration</h4>
+                </div>
+                <div class="glass-card border-purple desc-card floating">
+                    <h4 class="mobile-title">Infrastructure Migration</h4>
+                    <p>Collaborated on the migration of legacy processors to Amazon ECS, leveraging AWS Fargate and Auto Scaling groups to enhance infrastructure elasticity and resource efficiency.</p>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-purple topic-card floating floating-delay-1">
+                    <h4>Codebase Modernization</h4>
+                </div>
+                <div class="glass-card border-purple desc-card floating floating-delay-2">
+                    <h4 class="mobile-title">Codebase Modernization</h4>
+                    <p>Refactored and modularized a 6,000-line Swagger codebase, streamlining API integration and automating documentation workflows.</p>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-purple topic-card floating">
+                    <h4>Deployment Guardrails</h4>
+                </div>
+                <div class="glass-card border-purple desc-card floating floating-delay-1">
+                    <h4 class="mobile-title">Deployment Guardrails</h4>
+                    <p>Implemented GPU health checks and automated validation scripts to prevent the deployment of faulty instances, increasing overall production reliability.</p>
+                </div>
+            </div>
+            <div class="experience-row hidden">
+                <div class="glass-card border-purple topic-card floating floating-delay-2">
+                    <h4>Advanced CI/CD Strategies</h4>
+                </div>
+                <div class="glass-card border-purple desc-card floating">
+                    <h4 class="mobile-title">Advanced CI/CD Strategies</h4>
+                    <p>Expanded pipeline capabilities by introducing A/B testing deployment strategies and automated resource cleanup tasks, resolving long-standing issues with broken build jobs.</p>
+                    <div class="metric-highlight">A/B Deployment Integrated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="hidden"><h2 class="section-title floating">Projects</h2></div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="hidden">
+                <div class="glass-card border-purple floating floating-delay-2">
+                    <h3><a href="#" target="_blank" class="project-link">Travellers Blog Website ↗</a></h3>
+                    <div class="timeline-date" style="color: var(--text-muted);">Aug 2020 - Jan 2021</div>
+                    <p style="color: #cbd5e1;">A full stack website built using MongoDB, Express, and Node.js. The platform allows users to post their travel photos and includes features like account login, verification, and comments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="hidden"><h2 class="section-title floating">Education</h2></div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="hidden">
+                <div class="glass-card border-cyan floating">
+                    <h3>BE in Information Science</h3>
+                    <h4>RNSIT Bengaluru, Karnataka</h4>
+                    <div class="timeline-date" style="color: var(--text-muted);">Graduated: August 2021</div>
+                    <p style="color: #cbd5e1;">GPA: 8.75</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="hidden"><h2 class="section-title floating floating-delay-1">Core Arsenal</h2></div>
+        <div class="skills-grid hidden">
+            <div class="skill-card floating">
+                <h4>Python</h4>
+                <p>Data processing & backend logic</p>
+            </div>
+            <div class="skill-card floating floating-delay-1">
+                <h4>Java</h4>
+                <p>Robust enterprise applications</p>
+            </div>
+            <div class="skill-card floating floating-delay-2">
+                <h4>Dotnet</h4>
+                <p>Windows framework & APIs</p>
+            </div>
+            <div class="skill-card floating floating-delay-3">
+                <h4>DSA</h4>
+                <p>Core logic & problem solving</p>
+            </div>
+            <div class="skill-card floating">
+                <h4>AWS</h4>
+                <p>Cloud infrastructure & serverless</p>
+            </div>
+            <div class="skill-card floating floating-delay-1">
+                <h4>CI/CD</h4>
+                <p>Automated pipelines & delivery</p>
+            </div>
+            <div class="skill-card floating floating-delay-2">
+                <h4>Git & GitLab</h4>
+                <p>Version control & collaboration</p>
+            </div>
+            <div class="skill-card floating floating-delay-3">
+                <h4>Docker</h4>
+                <p>Containerized environments</p>
+            </div>
+            <div class="skill-card floating">
+                <h4>NewRelic</h4>
+                <p>System monitoring & analytics</p>
+            </div>
+            <div class="skill-card floating floating-delay-1">
+                <h4>Looker</h4>
+                <p>Data visualization & BI</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="hidden floating floating-delay-2">
+            <h2 class="section-title" style="margin-bottom: 20px;">Get In Touch</h2>
+            <div class="contact-links">
+                <a href="mailto:shivamtiwari2702@gmail.com" class="contact-btn email-btn">
+                    <span class="btn-text">Email</span>
+                    <span class="email-address">shivamtiwari2702@gmail.com</span>
+                </a>
+                <a href="#" class="contact-btn" target="_blank">LinkedIn</a>
+                <a href="#" class="contact-btn" target="_blank">GitHub</a>
+                <a href="#" class="contact-btn" target="_blank">LeetCode</a>
+                <a href="Resume.pdf" class="contact-btn" target="_blank">Resume</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

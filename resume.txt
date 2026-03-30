@@ -1,0 +1,52 @@
+Shivam Tiwari +919986366964 •  shivamtiwari2702@gmail.com •  Shivam Tiwari
+
+PROFESSIONAL SUMMARY
+
+Experienced software engineer with nearly 5 years of expertise in building and optimizing cloud-based
+solutions. Proficient in deploying scalable ML models, maintaining infrastructure and integrating
+AWS services. Demonstrated success in reducing hosting costs, upgrading software infrastructure,
+optimizing services and leading technical initiatives.
+
+EXPERIENCE
+
+Cimpress India
+Senior Software Engineer Jan 2023 – Present
+○ Cost-Optimized Hybrid Deployment: Engineered a hybrid system transitioning EC2-based services to server-
+less architectures on-demand; updated the processor to utilize ECR repositories over MAR files, enabling
+zero-cost hosting for POC services and reducing API costs by 35%.
+○ High-Performance ECS Scaling: Integrated Amazon EFS with ECS cluster instances to persist container
+layers locally; eliminated redundant ECR image pulls, resulting in an 80% reduction in auto-scaling spin-up
+times.
+○ CI/CD Infrastructure Management: Fully configured and maintained self-hosted GitLab runners; re-
+architected configurations to support concurrent multi-job execution on single instances, significantly im-
+proving resource utilization and reducing pipeline overhead.
+○ ML Model Orchestration: Led the deployment and lifecycle management of multiple ML models, integrating
+external APIs to enhance service reliability and throughput.
+○ Eﬀiciency & Scaling: Developed automated scheduled scaling mechanisms and optimized memory footprints
+across core services, achieving a 60% reduction in memory usage and ensuring cost-effective performance
+during low-demand periods.
+
+Cimpress India
+Software Engineer Aug 2021 – Dec 2022
+○ Infrastructure Migration: Collaborated on the migration of legacy processors to Amazon ECS, leveraging
+AWS Fargate and Auto Scaling groups to enhance infrastructure elasticity and resource eﬀiciency.
+○ Codebase Modernization: Refactored and modularized a 6,000-line Swagger codebase, streamlining API
+integration and automating documentation workflows.
+○ Deployment Guardrails: Implemented GPU health checks and automated validation scripts to prevent the
+deployment of faulty instances, increasing overall production reliability.
+○ Advanced CI/CD Strategies: Expanded pipeline capabilities by introducing A/B testing deployment strate-
+gies and automated resource cleanup tasks, resolving long-standing issues with broken build jobs.
+
+EDUCATION
+RNSIT Bengaluru, Karnataka
+BE in Information Science GPA: 8.75 Graduation: August 2021
+
+PROJECTS
+Travellers Blog Website Aug 2020 - Jan 2021
+○ A full stack website built using mongoDB, express and nodeJS.
+○ Website built for users to post their travelling photos with features like account login, verification and
+comments.
+
+SKILLS
+○ Programming Languages and Tech: Python, Java, Dotnet, Data Structures, Algorithms
+ DevOps and Cloud: AWS, CI/CD, Git, Gitlab, NewRelic, Looker, Docker.
