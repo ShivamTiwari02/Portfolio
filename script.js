@@ -137,5 +137,71 @@ window.addEventListener('scroll', () => {
     }, 1000); // Hides 1 second after scroll stops
 });
 
+// 5. SKILL CARDS INTERACTION
+const skillCards = document.querySelectorAll('.skill-card');
+const skillsWrapper = document.querySelector('.skills-wrapper');
+const detailTitle = document.getElementById('detail-title');
+const detailDesc = document.getElementById('detail-desc');
+const closeDetailBtn = document.querySelector('.close-detail-btn');
+const detailPanel = document.getElementById('detail-panel');
+const skillsGrid = document.querySelector('.skills-grid');
+
+if (skillCards.length > 0 && skillsWrapper) {
+    skillCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const isActive = card.classList.contains('active');
+            
+            // Clear active state from all cards
+            skillCards.forEach(c => c.classList.remove('active'));
+
+            if (isActive) {
+                // If clicking the active card again, just close the panel
+                skillsWrapper.classList.remove('active-detail');
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        if (!skillsWrapper.classList.contains('active-detail')) {
+                            skillsGrid.appendChild(detailPanel);
+                        }
+                    }, 400);
+                }
+            } else {
+                if (window.innerWidth <= 768) {
+                    let insertAfterNode = card;
+                    if (window.innerWidth > 480) {
+                        const cardIndex = Array.from(skillCards).indexOf(card);
+                        // If clicking left card (even index) in 2-col grid, insert after right card
+                        if (cardIndex % 2 === 0 && cardIndex + 1 < skillCards.length) {
+                            insertAfterNode = skillCards[cardIndex + 1];
+                        }
+                    }
+                    skillsGrid.insertBefore(detailPanel, insertAfterNode.nextSibling);
+                    
+                    // Force a browser reflow so the opening animation triggers smoothly after moving the DOM node
+                    void detailPanel.offsetWidth;
+                }
+                // Set current card active, update text, and open panel
+                card.classList.add('active');
+                detailTitle.textContent = card.getAttribute('data-skill');
+                detailDesc.textContent = card.getAttribute('data-exp');
+                skillsWrapper.classList.add('active-detail');
+            }
+        });
+    });
+
+    if (closeDetailBtn) {
+        closeDetailBtn.addEventListener('click', () => {
+            skillsWrapper.classList.remove('active-detail');
+            skillCards.forEach(c => c.classList.remove('active'));
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    if (!skillsWrapper.classList.contains('active-detail')) {
+                        skillsGrid.appendChild(detailPanel);
+                    }
+                }, 400);
+            }
+        });
+    }
+}
+
 init();
 animate();

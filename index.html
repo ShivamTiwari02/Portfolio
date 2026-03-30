@@ -156,7 +156,7 @@
         <div style="max-width: 800px; margin: 0 auto;">
             <div class="hidden">
                 <div class="glass-card border-purple floating floating-delay-2">
-                    <h3><a href="#" target="_blank" class="project-link">Travellers Blog Website ↗</a></h3>
+                    <h3><a href="https://github.com/ShivamTiwari02/Campground_Public" target="_blank" class="project-link">Travellers Blog Website ↗</a></h3>
                     <div class="timeline-date" style="color: var(--text-muted);">Aug 2020 - Jan 2021</div>
                     <p style="color: #cbd5e1;">A full stack website built using MongoDB, Express, and Node.js. The platform allows users to post their travel photos and includes features like account login, verification, and comments.</p>
                 </div>
@@ -180,46 +180,54 @@
 
     <section id="skills">
         <div class="hidden"><h2 class="section-title floating floating-delay-1">Core Arsenal</h2></div>
-        <div class="skills-grid hidden">
-            <div class="skill-card floating">
-                <h4>Python</h4>
-                <p>Data processing & backend logic</p>
-            </div>
-            <div class="skill-card floating floating-delay-1">
-                <h4>Java</h4>
-                <p>Robust enterprise applications</p>
-            </div>
-            <div class="skill-card floating floating-delay-2">
-                <h4>Dotnet</h4>
-                <p>Windows framework & APIs</p>
-            </div>
-            <div class="skill-card floating floating-delay-3">
-                <h4>DSA</h4>
-                <p>Core logic & problem solving</p>
-            </div>
-            <div class="skill-card floating">
-                <h4>AWS</h4>
-                <p>Cloud infrastructure & serverless</p>
-            </div>
-            <div class="skill-card floating floating-delay-1">
-                <h4>CI/CD</h4>
-                <p>Automated pipelines & delivery</p>
-            </div>
-            <div class="skill-card floating floating-delay-2">
-                <h4>Git & GitLab</h4>
-                <p>Version control & collaboration</p>
-            </div>
-            <div class="skill-card floating floating-delay-3">
-                <h4>Docker</h4>
-                <p>Containerized environments</p>
-            </div>
-            <div class="skill-card floating">
-                <h4>NewRelic</h4>
-                <p>System monitoring & analytics</p>
-            </div>
-            <div class="skill-card floating floating-delay-1">
-                <h4>Looker</h4>
-                <p>Data visualization & BI</p>
+        <div class="skills-wrapper hidden">
+            <div class="skills-grid">
+                <div class="skill-card floating" data-skill="Python" data-exp="5+ years of experience building highly scalable backend logic, automated data processing pipelines, and deploying robust machine learning models.">
+                    <h4>Python</h4>
+                    <p>Data processing & backend</p>
+                </div>
+                <div class="skill-card floating floating-delay-1" data-skill="Java" data-exp="Proficient in developing enterprise-grade applications, maintaining legacy systems, and transitioning architectures to modern microservices.">
+                    <h4>Java</h4>
+                    <p>Enterprise applications</p>
+                </div>
+                <div class="skill-card floating floating-delay-2" data-skill="Dotnet" data-exp="Experienced in developing Windows frameworks, APIs, and optimizing core services for maximum efficiency and reduced memory footprints.">
+                    <h4>Dotnet</h4>
+                    <p>Windows framework & APIs</p>
+                </div>
+                <div class="skill-card floating floating-delay-3" data-skill="Data Structures" data-exp="Strong foundation in core logic and problem solving, consistently applying algorithmic optimizations to reduce infrastructure costs and latency.">
+                    <h4>DSA</h4>
+                    <p>Core logic & problem solving</p>
+                </div>
+                <div class="skill-card floating" data-skill="AWS" data-exp="Extensive hands-on experience with AWS ECS, Fargate, EC2, and EFS. Track record of engineering serverless on-demand transitions and auto-scaling setups.">
+                    <h4>AWS</h4>
+                    <p>Cloud infra & serverless</p>
+                </div>
+                <div class="skill-card floating floating-delay-1" data-skill="CI/CD" data-exp="Engineered advanced pipeline strategies including A/B deployment. Fully configured and managed self-hosted GitLab runners for concurrent multi-job execution.">
+                    <h4>CI/CD</h4>
+                    <p>Automated delivery</p>
+                </div>
+                <div class="skill-card floating floating-delay-2" data-skill="Git & GitLab" data-exp="Expert in version control workflows, collaboration, and modernizing extensive legacy codebases using streamlined Git strategies.">
+                    <h4>Git & GitLab</h4>
+                    <p>Version control & collaboration</p>
+                </div>
+                <div class="skill-card floating floating-delay-3" data-skill="Docker" data-exp="Deep expertise in containerized environments. Optimized redundant ECR image pulls and successfully migrated legacy processors to container-based architecture.">
+                    <h4>Docker</h4>
+                    <p>Containerized environments</p>
+                </div>
+                <div class="skill-card floating" data-skill="NewRelic" data-exp="Configured system monitoring, analytics, and automated health checks to ensure highly reliable, fault-tolerant production environments.">
+                    <h4>NewRelic</h4>
+                    <p>Monitoring & analytics</p>
+                </div>
+                <div class="skill-card floating floating-delay-1" data-skill="Looker" data-exp="Leveraged data visualization and BI tools to track scaling efficiency, API cost reductions, and overall system throughput.">
+                    <h4>Looker</h4>
+                    <p>Data visualization & BI</p>
+                </div>
+            
+                <div class="skill-detail-panel glass-card border-cyan" id="detail-panel">
+                    <button class="close-detail-btn">&times;</button>
+                    <h3 id="detail-title" style="color: var(--neon-cyan); font-size: 1.5rem; margin-bottom: 15px;">Skill</h3>
+                    <p id="detail-desc" style="color: #cbd5e1; font-size: 1rem; line-height: 1.6;">Description</p>
+                </div>
             </div>
         </div>
     </section>
