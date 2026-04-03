@@ -27,6 +27,24 @@ canvas.height = window.innerHeight;
 
 let particlesArray = [];
 
+// Mouse object to store coordinates
+let mouse = {
+    x: null,
+    y: null,
+    radius: 120
+};
+
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+// Reset mouse position when it leaves the window
+window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -41,6 +59,19 @@ class Particle {
         // Bounce off edges
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+        // Mouse interactivity (repel)
+        if (mouse.x != null && mouse.y != null) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < mouse.radius) {
+                const force = (mouse.radius - distance) / mouse.radius;
+                this.x -= (dx / distance) * force * 3;
+                this.y -= (dy / distance) * force * 3;
+            }
+        }
     }
     draw() {
         ctx.fillStyle = 'rgba(148, 163, 184, 0.3)'; // Muted particle color
