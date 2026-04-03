@@ -56,12 +56,27 @@ body {
 }
 
 .scroll-progress-bar {
+    position: relative;
     width: 100%;
     height: 0%;
     background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
     box-shadow: 0 0 10px rgba(6, 182, 212, 0.6), 0 0 15px rgba(139, 92, 246, 0.6);
     border-radius: 10px;
     transition: height 0.1s ease-out;
+}
+
+/* Comet head for the scroll progress to create a glowing trail */
+.scroll-progress-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px var(--neon-purple), 0 0 30px var(--neon-cyan);
 }
 
 /* === PARTICLE BACKGROUND === */
@@ -84,10 +99,20 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 100;
+    transition: top 0.3s ease;
+}
+
+/* Pseudo-element for nav background to prevent backdrop-filter nesting bugs */
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(11, 17, 32, 0.8);
     backdrop-filter: blur(10px);
-    z-index: 100;
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
+    z-index: -1;
 }
 
 nav h1 {
@@ -114,10 +139,27 @@ nav h1 {
     transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-main);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--neon-cyan);
     border-color: var(--neon-cyan);
     box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+.nav-links a:hover {
     transform: translateY(-2px) scale(1.05);
 }
 
@@ -180,6 +222,7 @@ section {
 .metric-highlight {
     display: inline-block;
     margin-top: 15px;
+    margin-right: 8px;
     padding: 8px 16px;
     border-radius: 20px;
     font-weight: 600;
@@ -187,6 +230,14 @@ section {
     background: rgba(6, 182, 212, 0.1);
     color: var(--neon-cyan);
     border: 1px solid rgba(6, 182, 212, 0.3);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.metric-highlight:hover {
+    background: rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    transform: translateY(-2px);
 }
 
 /* === HERO SECTION === */
@@ -616,10 +667,200 @@ footer {
     transform: translateY(0) scale(1);
 }
 
+/* Projects Section Reveal Glow */
+@keyframes project-glow-pulse {
+    0% { box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+    50% { box-shadow: 0 0 35px rgba(139, 92, 246, 0.3), 0 0 35px rgba(6, 182, 212, 0.3); }
+    100% { box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+}
+
+#projects .show .glass-card {
+    animation: project-glow-pulse 2s ease-out 0.4s;
+}
+
+/* === EASTER EGG TOAST === */
+.easter-egg-toast {
+    position: fixed;
+    top: 100px;
+    right: -400px;
+    width: 320px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid var(--neon-purple);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    z-index: 1001;
+    transition: right 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+.easter-egg-toast.show-toast {
+    right: 30px;
+}
+.easter-egg-toast h4 {
+    color: var(--neon-cyan);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+.easter-egg-toast p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* === EASTER EGG HINT === */
+.easter-egg-hint {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: rgba(11, 17, 32, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--neon-purple);
+    border-radius: 50%;
+    color: var(--neon-purple);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+    z-index: 98;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+.easter-egg-hint .hint-text {
+    position: absolute;
+    right: 60px;
+    width: 220px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: right;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.easter-egg-hint:hover {
+    background: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    transform: translateY(-3px);
+}
+.easter-egg-hint:hover .hint-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+.easter-egg-hint.hidden-hint {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+/* === BACK TO TOP BUTTON === */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: rgba(11, 17, 32, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 50%;
+    color: var(--neon-cyan);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--text-main);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+    transform: translateY(-3px);
+}
+
 /* === RESPONSIVE DESIGN === */
 @media screen and (max-width: 768px) {
     nav { padding: 15px 20px; }
-    .nav-links { display: none; } /* Simplified for mobile */
+    
+    nav.nav-hidden {
+        top: -100px; /* Hide using top instead of transform to preserve backdrop-filter */
+    }
+    
+    .hamburger { display: flex; }
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(11, 17, 32, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        border-bottom: 1px solid var(--glass-border);
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        z-index: -2; /* Slide from beautifully behind the nav background */
+    }
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Move scroll progress bar closer to the screen edge */
+    .scroll-progress-container {
+        right: 6px;
+        width: 2px;
+    }
+    .scroll-progress-bar::after {
+        width: 6px;
+        height: 6px;
+    }
 
     /* Permanently show email on mobile */
     .email-btn .btn-text {
@@ -695,6 +936,36 @@ footer {
         transform: scale(1) translateY(0);
         border-color: var(--glass-border);
         background: rgba(11, 17, 32, 0.98);
+    }
+
+    .easter-egg-toast {
+        top: 80px;
+        width: 280px;
+    }
+    .easter-egg-toast.show-toast {
+        right: 20px;
+    }
+
+    .easter-egg-hint {
+        bottom: 75px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .easter-egg-hint .hint-text {
+        right: 50px;
+        width: 180px;
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
     }
 }
 @media screen and (max-width: 480px) {

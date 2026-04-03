@@ -45,6 +45,22 @@ window.addEventListener('mouseout', () => {
     mouse.y = null;
 });
 
+// Add touch support for mobile devices
+window.addEventListener('touchstart', (event) => {
+    mouse.x = event.touches[0].clientX;
+    mouse.y = event.touches[0].clientY;
+});
+
+window.addEventListener('touchmove', (event) => {
+    mouse.x = event.touches[0].clientX;
+    mouse.y = event.touches[0].clientY;
+});
+
+window.addEventListener('touchend', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -130,14 +146,40 @@ function connect() {
     }
 }
 
+let easterEggTriggered = false;
+
 function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    let glowingCount = 0;
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
+        
+        // Count particles that are currently brightly glowing
+        if (particlesArray[i].glow > 0.5) glowingCount++;
     }
     connect();
+    
+    // Easter Egg: Dynamic threshold based on device screen size
+    const easterEggThreshold = window.innerWidth <= 768 ? 20 : 30;
+    if (glowingCount >= easterEggThreshold && !easterEggTriggered) {
+        easterEggTriggered = true;
+        const toast = document.getElementById('easter-egg-toast');
+        if (toast) {
+            const toastDesc = toast.querySelector('p');
+            if (toastDesc) {
+                toastDesc.textContent = `Whoa! You just made over ${easterEggThreshold} particles glow at once. The background didn't stand a chance!`;
+            }
+            toast.classList.add('show-toast');
+            setTimeout(() => { 
+                toast.classList.remove('show-toast'); 
+                // Reset the trigger so they can play the easter egg again!
+                setTimeout(() => { easterEggTriggered = false; }, 1000);
+            }, 5000);
+        }
+    }
 }
 
 // Handle Window Resize
@@ -349,3 +391,116 @@ if (heroDesc) {
 
 init();
 animate();
+
+// 7. MOBILE NAVIGATION MENU
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// 8. AUTO-HIDE NAVIGATION ON MOBILE SCROLL
+const nav = document.querySelector('nav');
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    if (window.innerWidth > 768) return; // Only apply on mobile devices
+
+    const currentScrollY = window.scrollY;
+    
+    // Don't hide if the mobile dropdown menu is currently open
+    if (navLinks && navLinks.classList.contains('active')) return;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        nav.classList.add('nav-hidden'); // Scrolling down
+    } else {
+        nav.classList.remove('nav-hidden'); // Scrolling up
+    }
+    
+    lastScrollY = currentScrollY;
+});
+
+// 9. ACTIVE NAVIGATION HIGHLIGHT (Scroll Spy)
+const sections = document.querySelectorAll('section[id], footer[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+    let currentId = '';
+    const scrollPosition = window.scrollY + window.innerHeight * 0.4; // Tracks 40% from the top of the screen
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+            currentId = section.getAttribute('id');
+        }
+    });
+
+    if (window.scrollY < 100) {
+        currentId = ''; // Clear highlight at the very top (Hero)
+    } else {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            const rect = contactSection.getBoundingClientRect();
+            // Highlight Contact if it prominently crosses the 60% mark of the screen
+            // OR if the user is safely within 50px of the absolute bottom of the page
+            if (rect.top <= window.innerHeight * 0.6 || Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+                currentId = 'contact';
+            }
+        }
+    }
+
+    navItems.forEach(link => {
+        link.classList.remove('active');
+        if (currentId && link.getAttribute('href') === `#${currentId}`) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// 10. BACK TO TOP BUTTON
+const backToTopBtn = document.getElementById('back-to-top');
+const projectsSection = document.getElementById('projects');
+
+if (backToTopBtn && projectsSection) {
+    window.addEventListener('scroll', () => {
+        // Fade in slightly before hitting the exact top of the projects section
+        if (window.scrollY >= projectsSection.offsetTop - 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// 11. EASTER EGG HINT
+const easterEggHint = document.getElementById('easter-egg-hint');
+
+if (easterEggHint) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        if ((scrollTop / scrollHeight) > 0.5) {
+            easterEggHint.classList.add('hidden-hint');
+        } else {
+            easterEggHint.classList.remove('hidden-hint');
+        }
+    });
+}

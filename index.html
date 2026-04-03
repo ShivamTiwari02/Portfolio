@@ -17,7 +17,12 @@
 
     <nav>
         <a href="#" style="text-decoration: none;"><h1>ST.</h1></a>
-        <div class="nav-links">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#education">Education</a>
@@ -162,6 +167,28 @@
                 </div>
             </div>
         </div>
+
+        <div style="max-width: 800px; margin: 30px auto 0;">
+            <div class="hidden">
+                <div class="glass-card border-cyan floating">
+                    <h3><a href="#" class="project-link">AI-Powered Interactive Portfolio 🔗</a></h3>
+                    <div class="timeline-date" style="color: var(--text-muted);">Present</div>
+                    <h4 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 15px; font-weight: 400;">Front-End Development & AI Collaboration</h4>
+                    <div class="timeline-content">
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">A modern, highly interactive developer portfolio completely designed and developed in collaboration with AI.</p>
+                        <ul>
+                            <li>Engineered a custom physics-based particle background on HTML5 Canvas that dynamically reacts to mouse movements and repels particles.</li>
+                            <li>Built a fully responsive Glassmorphism UI with smooth, hardware-accelerated CSS animations and neon glowing accents.</li>
+                            <li>Implemented bulletproof JavaScript logic for dynamic layout transitions, a custom scroll progress bar, and a real-time responsive typewriter effect.</li>
+                            <li>Created entirely from scratch using Vanilla JavaScript, HTML, and CSS, without relying on external UI frameworks.</li>
+                        </ul>
+                        <span class="metric-highlight">Built with AI</span>
+                        <span class="metric-highlight">Vanilla JS</span>
+                        <span class="metric-highlight">Canvas API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="education">
@@ -247,6 +274,18 @@
             </div>
         </div>
     </footer>
+
+    <div id="easter-egg-toast" class="easter-egg-toast">
+        <h4>⚡ Lightning Fast!</h4>
+        <p>Whoa! You just made over 30 particles glow at once. The background didn't stand a chance!</p>
+    </div>
+
+    <div id="easter-egg-hint" class="easter-egg-hint">
+        ?
+        <span class="hint-text">Swipe around the background dots as fast as possible for a hidden surprise!</span>
+    </div>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">&#8593;</button>
 
     <script src="script.js"></script>
 </body>
