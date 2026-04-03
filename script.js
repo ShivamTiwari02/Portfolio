@@ -157,6 +157,18 @@ if (skillCards.length > 0 && skillsWrapper) {
             if (isActive) {
                 // If clicking the active card again, just close the panel
                 skillsWrapper.classList.remove('active-detail');
+                skillsGrid.classList.remove('has-active-card');
+                
+                // Unlock the section height after transition to restore responsive flow
+                const parentSection = skillsWrapper.closest('section');
+                if (parentSection) {
+                    setTimeout(() => {
+                        if (!skillsWrapper.classList.contains('active-detail')) {
+                            parentSection.style.minHeight = '';
+                        }
+                    }, 400); // Wait for CSS transition
+                }
+                
                 if (window.innerWidth <= 768) {
                     setTimeout(() => {
                         if (!skillsWrapper.classList.contains('active-detail')) {
@@ -179,11 +191,21 @@ if (skillCards.length > 0 && skillsWrapper) {
                     // Force a browser reflow so the opening animation triggers smoothly after moving the DOM node
                     void detailPanel.offsetWidth;
                 }
+                
+                // Lock the parent section height so the page doesn't jump when cards shrink
+                const parentSection = skillsWrapper.closest('section');
+                if (parentSection && window.innerWidth > 768) {
+                    if (!parentSection.style.minHeight) {
+                        parentSection.style.minHeight = parentSection.offsetHeight + 'px';
+                    }
+                }
+                
                 // Set current card active, update text, and open panel
                 card.classList.add('active');
                 detailTitle.textContent = card.getAttribute('data-skill');
                 detailDesc.textContent = card.getAttribute('data-exp');
                 skillsWrapper.classList.add('active-detail');
+                skillsGrid.classList.add('has-active-card');
             }
         });
     });
@@ -191,7 +213,18 @@ if (skillCards.length > 0 && skillsWrapper) {
     if (closeDetailBtn) {
         closeDetailBtn.addEventListener('click', () => {
             skillsWrapper.classList.remove('active-detail');
+            skillsGrid.classList.remove('has-active-card');
             skillCards.forEach(c => c.classList.remove('active'));
+            
+            const parentSection = skillsWrapper.closest('section');
+            if (parentSection) {
+                setTimeout(() => {
+                    if (!skillsWrapper.classList.contains('active-detail')) {
+                        parentSection.style.minHeight = '';
+                    }
+                }, 400);
+            }
+            
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
                     if (!skillsWrapper.classList.contains('active-detail')) {
