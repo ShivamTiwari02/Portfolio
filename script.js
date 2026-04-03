@@ -52,6 +52,9 @@ class Particle {
         this.size = Math.random() * 2 + 0.5;
         this.speedX = Math.random() * 1 - 0.5;
         this.speedY = Math.random() * 1 - 0.5;
+        this.glow = 0;
+        // Randomly assign cyan or purple for the interaction highlight
+        this.glowColor = Math.random() > 0.5 ? '#06b6d4' : '#8b5cf6';
     }
     update() {
         this.x += this.speedX;
@@ -70,7 +73,13 @@ class Particle {
                 const force = (mouse.radius - distance) / mouse.radius;
                 this.x -= (dx / distance) * force * 3;
                 this.y -= (dy / distance) * force * 3;
+                this.glow = 1; // Trigger glow when pushed
             }
+        }
+        
+        // Smoothly fade out the glow over time
+        if (this.glow > 0) {
+            this.glow -= 0.02;
         }
     }
     draw() {
@@ -78,6 +87,17 @@ class Particle {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
+        
+        // Draw colored glowing overlay if active
+        if (this.glow > 0) {
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, Math.min(this.glow, 1));
+            ctx.fillStyle = this.glowColor;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size + 1, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
     }
 }
 
@@ -264,6 +284,66 @@ if (skillCards.length > 0 && skillsWrapper) {
                 }, 400);
             }
         });
+    }
+}
+
+// 6. HERO TYPEWRITER EFFECT
+const heroDesc = document.querySelector('.hero p');
+if (heroDesc) {
+    const text = heroDesc.textContent.trim();
+    if (text.length > 0) {
+        heroDesc.textContent = ''; 
+        heroDesc.style.position = 'relative';
+        
+        const charSpans = [];
+        // Pre-render text invisibly to lock responsive layout and word-wraps
+        for (let i = 0; i < text.length; i++) {
+            const span = document.createElement('span');
+            span.textContent = text[i];
+            span.style.visibility = 'hidden';
+            heroDesc.appendChild(span);
+            charSpans.push(span);
+        }
+        const cursorSpan = document.createElement('span');
+        
+        cursorSpan.textContent = '|';
+        cursorSpan.style.position = 'absolute';
+
+        cursorSpan.style.fontWeight = 'bold';
+        cursorSpan.style.color = 'var(--neon-cyan)';
+        cursorSpan.style.animation = 'cursor-blink 1s step-end infinite';
+        
+        if (charSpans.length > 0) {
+            cursorSpan.style.left = charSpans[0].offsetLeft + 'px';
+            cursorSpan.style.top = charSpans[0].offsetTop + 'px';
+        }
+        heroDesc.appendChild(cursorSpan);
+
+        let i = 0;
+        function typeWriter() {
+            if (i < charSpans.length) {
+                charSpans[i].style.visibility = 'visible';
+                
+                // Move cursor using exact static coordinates
+                const currentSpan = charSpans[i];
+                cursorSpan.style.left = (currentSpan.offsetLeft + currentSpan.offsetWidth) + 'px';
+                cursorSpan.style.top = currentSpan.offsetTop + 'px';
+                    
+                i++;
+                setTimeout(typeWriter, Math.random() * 15 + 10); // 10-25ms random typing delay
+            } else {
+                // Fade out the blinking cursor gracefully when typing is done
+                cursorSpan.style.animation = 'none';
+                cursorSpan.style.transition = 'opacity 0.8s ease';
+                cursorSpan.style.opacity = '0';
+                setTimeout(() => {
+                    cursorSpan.remove();
+                }, 800);
+            }
+        }
+        
+        // Start typing slightly after the page entrance animation finishes
+        setTimeout(typeWriter, 1200);
     }
 }
 
