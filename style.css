@@ -596,6 +596,10 @@ footer {
     padding: 60px 20px 80px;
     border-top: 1px solid var(--glass-border);
     margin-top: 60px;
+    background: rgba(11, 17, 32, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .contact-links {
@@ -710,11 +714,36 @@ footer {
     line-height: 1.4;
 }
 
+.score-pop {
+    display: inline-block;
+    color: var(--neon-cyan);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.score-pop.animating {
+    animation: score-update-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes score-update-pop {
+    0% { transform: scale(1); color: var(--neon-cyan); }
+    50% { transform: scale(1.4); color: var(--neon-purple); text-shadow: 0 0 10px rgba(139, 92, 246, 0.8); }
+    100% { transform: scale(1); color: var(--neon-cyan); }
+}
+
 /* === EASTER EGG HINT === */
-.easter-egg-hint {
+.easter-egg-hint-wrapper {
     position: fixed;
     bottom: 90px;
     right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 98;
+    transition: all 0.4s ease;
+}
+
+.hint-icon {
     width: 45px;
     height: 45px;
     background: rgba(11, 17, 32, 0.8);
@@ -729,17 +758,16 @@ footer {
     justify-content: center;
     align-items: center;
     cursor: help;
-    z-index: 98;
     transition: all 0.4s ease;
     box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
 }
-.easter-egg-hint .hint-text {
+.easter-egg-hint-wrapper .hint-text {
     position: absolute;
     right: 60px;
     width: 220px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(11, 17, 32, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     padding: 12px 16px;
     border-radius: 12px;
@@ -754,17 +782,17 @@ footer {
     pointer-events: none;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
-.easter-egg-hint:hover {
+.easter-egg-hint-wrapper:hover .hint-icon {
     background: rgba(139, 92, 246, 0.2);
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
     transform: translateY(-3px);
 }
-.easter-egg-hint:hover .hint-text {
+.easter-egg-hint-wrapper:hover .hint-text {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
 }
-.easter-egg-hint.hidden-hint {
+.easter-egg-hint-wrapper.hidden-hint {
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -946,14 +974,16 @@ footer {
         right: 20px;
     }
 
-    .easter-egg-hint {
+    .easter-egg-hint-wrapper {
         bottom: 75px;
         right: 20px;
+    }
+    .hint-icon {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
     }
-    .easter-egg-hint .hint-text {
+    .easter-egg-hint-wrapper .hint-text {
         right: 50px;
         width: 180px;
         font-size: 0.8rem;

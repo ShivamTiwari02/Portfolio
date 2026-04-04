@@ -147,6 +147,7 @@ function connect() {
 }
 
 let easterEggTriggered = false;
+let currentEasterEggHighScore = 0;
 
 function animate() {
     requestAnimationFrame(animate);
@@ -163,21 +164,49 @@ function animate() {
     connect();
     
     // Easter Egg: Dynamic threshold based on device screen size
-    const easterEggThreshold = window.innerWidth <= 768 ? 20 : 30;
-    if (glowingCount >= easterEggThreshold && !easterEggTriggered) {
-        easterEggTriggered = true;
-        const toast = document.getElementById('easter-egg-toast');
-        if (toast) {
-            const toastDesc = toast.querySelector('p');
-            if (toastDesc) {
-                toastDesc.textContent = `Whoa! You just made over ${easterEggThreshold} particles glow at once. The background didn't stand a chance!`;
+    const easterEggThreshold = window.innerWidth <= 768 ? 15 : 25;
+    if (glowingCount >= easterEggThreshold) {
+        if (!easterEggTriggered) {
+            easterEggTriggered = true;
+            currentEasterEggHighScore = glowingCount;
+            const toast = document.getElementById('easter-egg-toast');
+            if (toast) {
+                const toastDesc = toast.querySelector('p');
+                if (toastDesc) {
+                    toastDesc.innerHTML = `Whoa! You just made <span class="score-pop animating">${currentEasterEggHighScore}</span> particles glow at once. The background didn't stand a chance!`;
+                    setTimeout(() => {
+                        const span = toastDesc.querySelector('.score-pop');
+                        if (span) span.classList.remove('animating');
+                    }, 300);
+                }
+                toast.classList.add('show-toast');
+                setTimeout(() => { 
+                    toast.classList.remove('show-toast'); 
+                    // Reset the trigger so they can play the easter egg again!
+                    setTimeout(() => { 
+                        easterEggTriggered = false; 
+                        currentEasterEggHighScore = 0;
+                    }, 1000);
+                }, 5000);
             }
-            toast.classList.add('show-toast');
-            setTimeout(() => { 
-                toast.classList.remove('show-toast'); 
-                // Reset the trigger so they can play the easter egg again!
-                setTimeout(() => { easterEggTriggered = false; }, 1000);
-            }, 5000);
+        } else if (glowingCount > currentEasterEggHighScore) {
+            // Live update the number if the user keeps swiping faster while the toast is visible
+            currentEasterEggHighScore = glowingCount;
+            const toastDesc = document.querySelector('#easter-egg-toast p');
+            if (toastDesc) {
+                let scoreSpan = toastDesc.querySelector('.score-pop');
+                if (!scoreSpan) {
+                    toastDesc.innerHTML = `Whoa! You just made <span class="score-pop">${currentEasterEggHighScore}</span> particles glow at once. The background didn't stand a chance!`;
+                    scoreSpan = toastDesc.querySelector('.score-pop');
+                } else {
+                    scoreSpan.textContent = currentEasterEggHighScore;
+                }
+                
+                if (scoreSpan && !scoreSpan.classList.contains('animating')) {
+                    scoreSpan.classList.add('animating');
+                    setTimeout(() => { scoreSpan.classList.remove('animating'); }, 300);
+                }
+            }
         }
     }
 }
